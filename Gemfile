@@ -19,6 +19,7 @@ gem "solid_queue"
 gem "solid_cable"
 
 gem "bootsnap", require: false
+gem "simple_form"
 
 gem "kamal", require: false
 
