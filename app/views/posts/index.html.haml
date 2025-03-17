@@ -2,5 +2,3 @@
   %ul.list-group
     - @posts.each do |post|
       %li.list-group-item=post.content
-    = simple_form_for @new_post do |f|
-      = f.input :content
