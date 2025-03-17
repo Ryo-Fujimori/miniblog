@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: %i[edit update]
+
   def index
     @posts = Post.order(id: :desc).limit(10)
   end
@@ -17,11 +19,9 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to root_path
     else
@@ -30,6 +30,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:content)
