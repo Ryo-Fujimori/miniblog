@@ -1,7 +1,6 @@
-.container
-  %ul.list-group
-    - @posts.each do |post|
-      %li.list-group-item
-        = post.content
-        = link_to '編集', edit_post_path(post)
-  = link_to '新規投稿', new_post_path
+%ul.list-group
+  - @posts.each do |post|
+    %li.list-group-item
+      = post.content
+      = link_to '編集', edit_post_path(post)
+= link_to '新規投稿', new_post_path
