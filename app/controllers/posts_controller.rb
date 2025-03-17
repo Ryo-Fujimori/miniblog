@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     @new_post = Post.new(post_params)
     pp @new_post
     @new_post.save
-    redirect_to '/'
+    redirect_to root_path
   end
 
   def edit
@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.update(post_params)
-    redirect_to '/'
+    redirect_to root_path
   end
 
   private
