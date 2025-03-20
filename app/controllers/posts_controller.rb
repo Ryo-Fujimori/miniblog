@@ -1,30 +1,39 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: %i[edit update]
+
   def index
-    @posts = Post.order(id: 'DESC').limit(10)
+    @posts = Post.order(id: :desc).limit(10)
   end
 
   def new
-    @new_post = Post.new
+    @post = Post.new
   end
 
   def create
-    @new_post = Post.new(post_params)
-    pp @new_post
-    @new_post.save
-    redirect_to root_path
+    @post = Post.new(post_params)
+    if @post.save
+      redirect_to root_path, notice: '投稿作成！' # ユーザーへの通知を渡せる（viewに出すところはあとでやってみて）
+    else
+      render :new
+    end
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
-    @post.update(post_params)
-    redirect_to root_path
+    if @post.update(post_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:content)
