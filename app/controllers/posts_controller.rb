@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[edit update]
+  before_action :set_post, only: %i[edit update destroy]
 
   def index
     @posts = Post.order(id: :desc).limit(10)
@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      redirect_to root_path, notice: '投稿作成！' # ユーザーへの通知を渡せる（viewに出すところはあとでやってみて）
+      redirect_to root_path, notice: '投稿作成！'
     else
       render :new
     end
@@ -26,6 +26,14 @@ class PostsController < ApplicationController
       redirect_to root_path
     else
       render :edit
+    end
+  end
+
+  def destroy
+    if @post.destroy!
+      redirect_to root_path, notice: '削除完了'
+    else
+      redirect_to root_path
     end
   end
 
