@@ -30,12 +30,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if @post.destroy!
-      redirect_to root_path, notice: '削除完了'
-    else
-      redirect_to root_path
+    @post.destroy!
+    redirect_to root_path, notice: '削除完了'
     end
-  end
 
   private
 
