@@ -33,7 +33,6 @@ class PostsController < ApplicationController
     @post.destroy!
     redirect_to root_path, notice: '削除完了'
     end
-
   private
 
   def set_post
