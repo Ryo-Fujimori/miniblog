@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to root_path, notice: '投稿作成！' # ユーザーへの通知を渡せる（viewに出すところはあとでやってみて）
+      redirect_to root_path, notice: '投稿作成！'
     else
       render :new
     end
@@ -34,6 +34,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post.destroy!
+    redirect_to root_path, notice: '削除完了'
+    end
   private
 
   def correct_user
