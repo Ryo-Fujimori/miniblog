@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[edit update]
-  before_action :authenticate_user!, only: %i[new create]
+  before_action :set_post, only: %i[show edit update]
+  before_action :authenticate_user!, only: %i[new create edit update]
+  before_action :correct_user, only: %i[edit update]
 
   def index
     @posts = Post.order(id: :desc).limit(10)
@@ -8,6 +9,9 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+  end
+
+  def show
   end
 
   def create
@@ -31,6 +35,11 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def correct_user
+    @user = User.find(@post.user_id)
+    redirect_to(root_url, status: :see_other) unless @user == current_user
+  end
 
   def set_post
     @post = Post.find(params[:id])
