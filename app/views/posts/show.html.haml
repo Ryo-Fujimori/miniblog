@@ -1,0 +1,6 @@
+- @user = User.find(@post.user_id)
+%container 
+  = @post.content
+  = @user.email
+  = @post.created_at
+= link_to("ポスト一覧",posts_path)
