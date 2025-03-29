@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to root_path, notice: '投稿作成！' # ユーザーへの通知を渡せる（viewに出すところはあとでやってみて）
     else
