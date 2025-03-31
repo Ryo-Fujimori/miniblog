@@ -1,0 +1,6 @@
+- @user = @post.user
+%container 
+  = @post.content
+  = @user.email
+  = @post.created_at
+= link_to("ポスト一覧",posts_path)
