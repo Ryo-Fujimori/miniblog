@@ -2,7 +2,7 @@
   .alert.alert-success= notice
 %ul.list-group
   - @posts.each do |post|
-    - @user = User.find(post.user_id)
+    - @user = post.user 
     %li.list-group-item
       = post.content
       = @user.email
