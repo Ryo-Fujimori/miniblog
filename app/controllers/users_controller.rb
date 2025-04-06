@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: %i[create]
+  before_action :authenticate_user!, only: %i[create index]
   def index
     @users = User.order(id: :desc).limit(10)
   end
@@ -7,9 +7,9 @@ class UsersController < ApplicationController
   def create
     @user = User.find(params[:id])
     if current_user.follow(@user)
-      redirect_to users_index_path
+      redirect_to users_path
     else
-      redirect_to users_index_path, notice: 'フォロー失敗'
+      redirect_to users_path, notice: 'フォロー失敗'
     end
   end
 end
