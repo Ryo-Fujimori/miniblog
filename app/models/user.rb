@@ -9,4 +9,9 @@ class User < ApplicationRecord
   def follow(user)
     active_relationships.create(followed_id: user.id)
   end
+
+  def unfollow(user)
+    relationship = current_user.active_relationships.find_by(followed_id: user.id)
+    relationship.destroy!
+  end
 end
