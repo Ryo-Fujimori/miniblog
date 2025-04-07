@@ -1,4 +1,4 @@
-class RelationshipsController < ApplicationController
+class Users::RelationshipsController < ApplicationController
   before_action :authenticate_user!, only: %i[create destroy]
 
   def create
