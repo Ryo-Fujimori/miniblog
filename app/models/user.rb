@@ -5,7 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :email, presence: true
-  
+
   def follow(user)
     active_relationships.create(followed_id: user.id)
   end
