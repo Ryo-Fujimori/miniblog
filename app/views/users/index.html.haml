@@ -1,6 +1,8 @@
+- if flash[:notice]
+  .alert.alert-success= notice
 %h1 ユーザー一覧
 %ul.list-group
   - @users.each do |user|
     %li.list-group-item
       = user.email
-      = button_to 'フォロー', method: :post , params: {id:user.id}
+      = button_to 'フォロー', relationships_path, method: :post , params: {id:user.id}
